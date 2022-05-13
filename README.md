@@ -1,15 +1,16 @@
 # Building TensorFlow from source
 
 This is a step-by-step guide for building a CPU version of TensorFlow on Linux and MacOS.
-Official instructions are available at https://www.tensorflow.org/install/source but they are not detailed wnough and I'm tired of troubleshooting the same issues every time I need to set up a new machine.
+Official instructions are available at https://www.tensorflow.org/install/source but they are not detailed enough and I'm tired of troubleshooting the same issues every time I need to set up a new machine.
+I wrote this guide mainly to avoid an unnecessary frustration in the future, though someone else might find it useful as well.
 
 
 ## Why building from source when you can just `pip install`?
 
 Have you seen messages like these:
 ```
-This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN)
-to use the following CPU instructions in performance-critical operations:  SSE3 SSE4.1 SSE4.2 AVX AVX2 FMA
+This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) 
+to use the following CPU instructions in performance-critical operations:  AVX2 FMA
 To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
 ```
 Then you can speed up your code by 20+% if you just build TensorFlow from source.
@@ -73,7 +74,17 @@ If the previous step completed without errors, this should be a pretty straightf
 ```
 
 8. **Install TensorFlow**\
-Install the package and enjoy your well-earned speed up!
+Finally, install the package.
+Keep in mind that the tags of your package will likely differ from mine!
+If you have the same version installed already, either uninstall it or run pip with the `--force-reinstall` flag.
 ```
-pip install /tmp/tensorflow_pkg/tensorflow-2.6.2.whl
+pip install /tmp/tensorflow_pkg/tensorflow-2.6.2-cp36-cp36m-linux_x86_64.whl
 ```
+
+9. **Verify successful installation**\
+Import TensorFlow to check your installation -- make sure to leave the current folder first:
+```python
+import tensorflow as tf
+tf.Variable(0)
+```
+If no warnings appear then all is well and you can enjoy your well-earned speed up!
